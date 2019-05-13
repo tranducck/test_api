@@ -1,0 +1,31 @@
+wb = xlsx_package.workbook
+@data.each do |dat|
+  wb.add_worksheet(name: dat[:sheet]) do |sheet|
+    sheet.add_row @excel_headers
+    dat[:data].each do |data|
+      corp_name = data["CompanyNameEN"]
+      contacts = data["LinkManEN"]
+      type = data["EntTypeEN"]
+      phone = data["Tel"] || ["Tel2"]
+      mail = data["Email"]
+      zip = data["ZipCode"]
+      address = data["AddrEN"]
+      post = data["PostEN"]
+      reg_time = data["RegTimeEN"] || data["RegTimeCN"]
+      fax = data["Fax"]
+      web = data["WebSite"]
+      reg_region = data["RegareaEN1"] + "-" + data["RegareaEN2"]
+      industry = data["Kind1EN"]
+      if data["Kind2EN"].present?
+        industry = industry + "-" + data["Kind2EN"]
+      end
+      if data["Kind3EN"].present?
+        industry = industry + "-" + data["Kind3EN"]
+      end
+      commodities = data["MainProductEN"]
+
+      sheet.add_row [corp_name, contacts, type, phone, mail, zip, address,
+        post, reg_time, fax, web, reg_region, industry, commodities]
+    end
+  end
+end
