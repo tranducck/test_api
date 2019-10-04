@@ -16,4 +16,26 @@ Rails.application.routes.draw do
 
   get "/contacts/house_hold", to: "contacts#index"
   get "/contacts/textiles", to: "contacts#index_2"
+
+  get "/tracking_info/:tracking", to: "application#tracking"
+  post "/domains", to: "application#domain"
+
+  get "/retailer/:retailer_id/warehouses", to: "application#warehouse"
+  get "/retailer/:retailer_id/stocks", to: "application#stock"
+  get "/retailer/:retailer_id/stock_histories", to: "application#history"
+
+  get "/request_merges", to: "application#merge"
+  get "/request_splits", to: "application#split"
+
+  get "/shopify_products", to: "application#shopify_products"
+  get "/shopify_products/:id", to: "application#shopify_product_detail"
+
+  get "/line_items", to: "application#line_item"
+  get "/line_items/report", to: "application#item_report"
+  get "/tracking_info", to: "application#tracking_info"
+  get "/stock_histories", to: "application#histories"
+  post "/permissions", to: "application#permission"
+  post "/authentication", to: "application#authen"
+
+  post "//bulk_fulfillments", to: "application#fulfill"
 end
